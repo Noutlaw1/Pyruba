@@ -21,7 +21,9 @@ Sample_Aruba_Object.Connect()
 RAPS = Sample_Aruba_Object.SearchInventory(name="RAP-1")
 
 #You can also provision the RAPs in Activate. It takes the attributes you want to assign to it in Activate as parameters, such as RAP Name or the associated user's name. The MAC address is required in order to find the right AP which uses colons. Don't use the folder-group parameter for now. Going to find a way to translate from the long ID it has in activate to something user friendly.
-Sample_Aruba_Object.ProvisionRAP("00:14:22:01:23:45", rap_user_name="sample_user", rap_name="sample_RAP_name")
+Sample_Aruba_Object.ProvisionRAP("00:14:22:01:23:45", 
+                                rap_user_name="sample_user", 
+                                rap_name="sample_RAP_name")
 ```
 
 ### Future ideas
