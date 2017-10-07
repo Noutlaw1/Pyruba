@@ -124,8 +124,7 @@ class Aruba:
                     lastitem['customerID'] +
                     '","deviceFullName":"' +
                     lastitem['customerName'] +
-                    '", "folderId":"' +
-                    folderId + '"}]}')
+                    '"}]}')
         csvfile.close()
         self.data = [('json', self.data)]
         return True
