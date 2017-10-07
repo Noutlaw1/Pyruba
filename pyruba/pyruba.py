@@ -90,3 +90,42 @@ class Aruba:
             cookies=self.connection.cookies,
             data=self.data)
         return True
+
+    def ProvisionRAPs(self, csv_location):
+        try:
+            csvfile = open(csv_location, 'r+')
+            reader = csv.DictReader(csvfile)
+        except (FileNotFoundError):
+            print("File not found.")
+        self.data = '{"devices":['
+        params = (
+        ('action', 'update'),
+        )
+        rows = []
+        for item in reader:
+            rows.append(item)
+        for item in rows[:-1]:
+            #Removed folder ID's from here.
+            #Going to figure out a better way to get them without the ID
+            self.data = (self.data +
+                         '{"mac":"' +
+                         item['mac'] +
+                         '","deviceName":"' +
+                        item['customerID'] +
+                        '","deviceFullName":"' +
+                        item['customerName'] +
+                        '"}')
+        lastitem = rows[len(rows)-1]
+        #Also removed folder name selection from here. Will fix, promise.
+        self.data = (self.data +
+                    '{"mac":"' +
+                    lastitem['mac'] +
+                    '","deviceName":"'+
+                    lastitem['customerID'] +
+                    '","deviceFullName":"' +
+                    lastitem['customerName'] +
+                    '", "folderId":"' +
+                    folderId + '"}]}')
+        csvfile.close()
+        self.data = [('json', self.data)]
+        return True
